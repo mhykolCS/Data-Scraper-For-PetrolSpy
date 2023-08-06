@@ -1,8 +1,3 @@
-#Things to do:
-#
-# fix EXE conversion
-#
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -10,6 +5,7 @@ from datetime import datetime
 import pandas as pd
 import openpyxl
 import time
+import threading
 
 
 def fileWrite(sheetTitle, col1, col2, col3, col4, col5):
@@ -52,38 +48,32 @@ def updateSheet(ampolLink : str, ampolIdentifier : str, ampolE10: bool, bpLink :
 
     fileWrite(sheetTitle, col1, col2, col3, col4, col5)
 
-print("Lytton")
-updateSheet("https://petrolspy.com.au/map/station/5212b1660364706598e39864", "3", False, 
+one = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/5212b1660364706598e39864", "3", False, 
             "https://petrolspy.com.au/map/station/574566b6e4b072e48718f237", "4", True,
-            "Lytton")
-
-print("\n\nGoodna")
-updateSheet("https://petrolspy.com.au/map/station/5212b1660364706598e39b92", "4", False, 
+            "Lytton",))
+two = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/5212b1660364706598e39b92", "4", False, 
             "https://petrolspy.com.au/map/station/5212adc90364fe88b9785a17", "3", False,
-            "Goodna")
-
-print("\n\nWindsor")
-updateSheet("https://petrolspy.com.au/map/station/63980755b9914209d956f6a2", "4", False, 
+            "Goodna"))
+three = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/63980755b9914209d956f6a2", "4", False, 
             "https://petrolspy.com.au/map/station/5965a35eb99142726c4dd1a9", "3", False,
-            "Windsor")
-
-print("\n\nKenmore")
-updateSheet("https://petrolspy.com.au/map/station/5212b1660364706598e39770", "4", False, 
+            "Windsor"))
+four = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/5212b1660364706598e39770", "4", False, 
             "https://petrolspy.com.au/map/station/5212adc90364fe88b97859d4", "3", True,
-            "Kenmore")
-
-print("\n\nJimboomba")
-updateSheet("https://petrolspy.com.au/map/station/5212b1660364706598e395ca", "3", False, 
+            "Kenmore"))
+five = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/5212b1660364706598e395ca", "3", False, 
             "https://petrolspy.com.au/map/station/53665f0503648cbfe539926f", "3", False,
-            "Jimboomba")
-
-print("\n\nAnnerley")
-updateSheet("https://petrolspy.com.au/map/station/5212b1660364706598e396e7", "4", False, 
+            "Jimboomba"))
+six = threading.Thread(target = updateSheet, args = ("https://petrolspy.com.au/map/station/5212b1660364706598e396e7", "4", False, 
             "https://petrolspy.com.au/map/station/5a249c15b991420497aa77a4", "4", False,
-            "Annerley")
+            "Annerley"))
 
 
-
+one.start()
+two.start()
+three.start()
+four.start()
+five.start()
+six.start()
 
 
 
